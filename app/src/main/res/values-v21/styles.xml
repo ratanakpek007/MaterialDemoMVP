@@ -1,0 +1,10 @@
+<resources>
+
+    <style name="MaterialTheme" parent="ParentTheme">
+
+        <item name="android:colorControlHighlight">@color/colorAccent</item>
+
+    </style>
+
+
+</resources>
