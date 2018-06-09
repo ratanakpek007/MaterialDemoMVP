@@ -1,6 +1,8 @@
 package delivery.food.materialtablayout
 
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -9,7 +11,8 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
     private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,8 +38,10 @@ class MainActivity : AppCompatActivity() {
         drawer_layout.addDrawerListener(toggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
-
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
+        nav_view.setNavigationItemSelectedListener(this)
+
+
     }
 
 
@@ -53,6 +58,18 @@ class MainActivity : AppCompatActivity() {
             R.id.logout -> Toast.makeText(this, "Logout", Toast.LENGTH_LONG).show()
         }
 
-        return false
+        return super.onOptionsItemSelected(item)
     }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.home -> Toast.makeText(this, "Home", Toast.LENGTH_LONG).show()
+            R.id.general -> Toast.makeText(this, "General", Toast.LENGTH_LONG).show()
+            R.id.pending -> Toast.makeText(this, "Pending", Toast.LENGTH_LONG).show()
+            R.id.logout -> Toast.makeText(this, "Logout", Toast.LENGTH_LONG).show()
+        }
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
 }

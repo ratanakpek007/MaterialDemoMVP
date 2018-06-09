@@ -15,6 +15,8 @@
     <style name="ToolbarThemeDemo" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="colorControlHighlight">#6b71af</item>
+
     </style>
 
     <style name="MenuPopup" parent="ThemeOverlay.AppCompat.Light">
@@ -23,8 +25,4 @@
         <item name="colorControlHighlight">#6b71af</item>
     </style>
 
-
-    <style name="Nav" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:drawableBottom">#6b71af</item>
-    </style>
 </resources>
