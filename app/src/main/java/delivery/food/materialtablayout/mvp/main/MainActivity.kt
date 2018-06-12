@@ -1,36 +1,33 @@
-package delivery.food.materialtablayout
+package delivery.food.materialtablayout.mvp.main
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import delivery.food.materialtablayout.R
+import delivery.food.materialtablayout.mvp.base.BaseActivity
+import delivery.food.materialtablayout.mvp.main.presenter.MainPresenterImpl
+import delivery.food.materialtablayout.mvp.main.presenter.MainPresenterWraper
+import delivery.food.materialtablayout.mvp.main.view.MainViewResult
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener, MainViewResult {
 
     private lateinit var toggle: ActionBarDrawerToggle
+
+    var mainPresenterWraper:MainPresenterWraper?=null
+
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        /**
-         * 1
-         * */
-        /*  setSupportActionBar(toolbar)
-          toolbar.title="I am second"
-          //supportActionBar!!.title="Toolbar Demo"
-
-          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-              toolbar.elevation=10f
-          } else {
-
-          }*/
 
 
         setSupportActionBar(toolbar)
@@ -42,8 +39,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
 
+
+
+        initPresenter()
+
+
+        mainPresenterWraper!!.fetchByViewToPresenter("Hello, Ratanak")
+
     }
 
+    /**
+     * *******************************View Initialize Section*******************************/
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -72,4 +78,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+
+
+    /**
+     * *******************************Login Section*******************************/
+
+    private fun initPresenter(){
+        mainPresenterWraper= MainPresenterImpl(this)
+    }
+
+
+
+
+
+
+    override fun onMessageSuccessPresenterToView(msg: String) {
+        Toast.makeText(this, "$msg", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onMessageFailPresenterToView(msg: String) {
+        Toast.makeText(this, "$msg", Toast.LENGTH_SHORT).show()
+    }
 }
